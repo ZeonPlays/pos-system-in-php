@@ -4,19 +4,16 @@
     <div class="card mt-4 shadow-sm">
         <div class="card-header">
             <h4 class="mb-8">Product</h4>
-            <a href="Product-create.php" class="btn btn-primary float-end">Add Product</a>
+            <a href="products-create.php" class="btn btn-primary float-end">Add Product</a>
         </div>
         <div class="card-body">
             <?php alertMessage(); ?>
 
             <?php
             $products = getAll('products');
-            if(!$products){
+            if (!$products) {
                 echo '<h4> Something went wrong </h4>';
-            }
-            if (mysqli_num_rows($products) > 0) {
-
-
+            } elseif (mysqli_num_rows($products) > 0) {
                 ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
@@ -30,13 +27,12 @@
                             </tr>
                         </thead>
                         <tbody>
-
-
+                            
                             <?php foreach ($products as $item): ?>
                                 <tr>
                                     <td><?= $item['id'] ?></td>
                                     <td>
-                                        <img src="../<?= $item['image'] ?>" style="width:50px height:50px" alt="Img">
+                                        <img src="../<?= $item['image'] ?>" style="width:50px; height:50px;" alt="Img">
                                     </td>
                                     <td><?= $item['name'] ?></td>
                                     <td>
@@ -49,27 +45,28 @@
                                         ?>
                                     </td>
                                     <td>
-                                        <a href="products-edit.php?id= <?= $item['id'];  ?>" class="btn btn-success btn-sm">Edit</a>
-                                        <a href="products-delete-php?id= <?= $item['id']; ?>" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="products-edit.php?id=<?= $item['id']; ?>"
+                                            class="btn btn-success btn-sm">Edit</a>
+                                        <a href="products-delete-php?id=<?= $item['id']; ?>"
+                                            class="btn btn-danger btn-sm">Delete</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                        <?php
+                        </tbody>
+                    </table>
+                </div>
+                <?php
             } else {
                 ?>
-                            <tr>
-                                <h4 class="0">No Record Found</h4>
-                            </tr>
-                            <?php
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <td colspan="5" class="text-center">No Record Found</td>
+                    </tr>
+                </table>
+                <?php
             }
             ?>
-                    </tbody>
-                </table>
-            </div>
         </div>
     </div>
 </div>
-</div>
-
-
 <?php include('includes/footer.php') ?>
