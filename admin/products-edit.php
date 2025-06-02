@@ -24,7 +24,7 @@ if($product) {
     if($product['status']== 200)
     {
 ?>
-
+<input type="hidden" name="product_id" value="<?= $product['data']['id']; ?>" />
                 <div class="row">
                     <div class="col md- mb-3">
                         <label>Select Category</label>
@@ -37,7 +37,8 @@ if($product) {
                                         foreach($categories as $cateItem) {
                                             ?>
 <option value="<?= $cateItem['id'];?>">
-    
+<?= $product['data']['category_id'] == $cateItem['id'] ? 'selected':'';?>
+
 <?=   $cateItem['name'];  ?>
  </option>  
 
